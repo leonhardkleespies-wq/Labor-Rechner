@@ -81,11 +81,23 @@ if auswahl == "Verdünnung":
 
 elif auswahl == "Einwaage":
   st.header("Einwaage (Masse in Gramm)")
+  molmassen = {
+    "NaCl": 58.44,
+    "Tris": 121.14,
+    "Glucose": 180.16,
+    "EDTA": 292.24,
+    "Glycin": 75.07,
+    "Saccharose": 342.30,
+    "Eigener Wert": 0.0
+  }
+  substanz = st.selectbox("Substanz", list(molmassen.keys()))
+  start_mm = molmassen[substanz]
   konz = st.number_input("Konzentration (mol/l)", value=0.1)
   vol = st.number_input("Volumen (Liter)", value=0.5)
-  mm = st.number_input("Molmasse (g/mol)", value=58.44)
+  mm = st.number_input("Molmasse (g/mol)", value=start_mm)
   if st.button("Berechnen"):
     st.write("Ergebnis (g):", einwaage(konz, vol, mm))
+
 
 elif auswahl == "Puffer-pH":
   st.header("Puffer-pH (Henderson-Hasselbalch)")
